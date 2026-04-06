@@ -1,0 +1,19 @@
+[Unit]
+Description=VSCode Container
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+Image=ghcr.io/chancearthur/vscode-tunnel:latest
+AutoUpdate=registry
+ContainerName=vscode
+HostName=ubuntu
+PublishPort=4321:4321/tcp
+Volume=%h/containers/vscode:/home/vscode:Z
+UserNS=keep-id:uid=1001,gid=1001
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
